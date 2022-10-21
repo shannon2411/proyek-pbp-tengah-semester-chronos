@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Covid Information</title>
+    <style>
+        .form-component{
+            padding: 0 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .navbar-title a{
+            text-decoration: none;
+            padding-left: 10px;
+            color: #205566;
+            font-weight: bolder;
+            font-size: 1.7rem;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .navbar-links a:hover{
+            color: #674ea7;
+        }
+
+        .navbar-links a {
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .title-content{
+            width: 60%;
+            padding: 10px 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color: #74cfbf;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .sticky {
+            position: fixed;
+            left: 20%;
+            z-index: 100;
+            top: 10px;
+        }
+
+        .sticky + .covinfo-content {
+            padding-top: 60px;
+        }
+
+        @media screen and (max-width: 576px) {
+            .navbar-title .brand-title {
+                display: none;
+            }
+        }
+
+        #indonesia{
+            margin-bottom: 30px;
+        }
+
+        #kumulatif{
+            margin-top: 30px;
+        }
+
+        .icon{
+            font-size: 7rem;
+        }
+
+    </style>
+{% endblock title %}
+
+{% block content %}
+<div class="d-block justify-content-center align-items-center" style="width: 100%; margin:0; padding: 10px;">
+    <div id="navbar-manual" class="jumbotron jumbotron-fluid d-flex justify-content-between align-items-center title-content" style="margin:auto; padding-bottom: 12px;">
+          <div class="navbar-title d-flex">
+            <a href="#" class="fas fa-user-md" style="font-size: 2rem; padding-top: 2px;"></a>
+            <a href="#" class="brand-title" style="margin: 0;">Covid Info</a>
+          </div>
+          <div class="navbar-links">
+            <a href="#indonesia">Indonesia</a>
+            <a href="#provinsi">Provinsi</a>
+          </div>
+    </div>
+    <div class="covinfo-content">
+        <div id="indonesia" class="card d-flex justify-content-center align-items-center" style="width: 100%; margin-top: 10px;">
+            <div class="card-header w-100">
+                <h5 class="card-title">Statistik Mingguan Kasus Covid-19 di Indonesia</h5>
+            </div>
+            <canvas id="linechart" width="100%" height="30px" data-url="{% url 'covid_info:covid-ind' %}" style ="padding: 0 10px"></canvas>
+            <div class="card-body" width="100%">
+                <p class="card-text" style="font-size: 0.7rem;"><i>Data diambil dari <b>data.covid19.go.id</b></i></p>
+            </div>
+        </div>
+
+        <div id="provinsi" class="card d-flex justify-content-center align-items-center" style="width: 100%; margin-top: 10px;">
+            <div class="card-header w-100">
+                <h5 class="card-title">Statistik Kumulatif Kasus Covid-19 Setiap Provinsi di Indonesia</h5>
+            </div>
+            {% include 'covid_info_pg/covforms.html' %}
+            <div class="wrap w-100 d-flex justify-content-around align-items-center" style ="padding: 0 10px">
+                <div class="card text-white bg-success mb-3" style="width: 18rem; text-align: center;">
+                    <div class="card-header">Kasus Sembuh</div>
+                    <div class="card-body">
+                        <i class="fas fa-first-aid icon"></i>
+                    </div>
+                  </div>
+                <div class="card text-white bg-warning mb-3" style="width: 18rem; text-align: center;">
+                    <div class="card-header">Kasus Positif</div>
+                    <div class="card-body">
+                        <i class="fas fa-fist-raised icon"></i>
+                    </div>
+                  </div>
+                  <div class="card text-white bg-danger mb-3" style="width: 18rem; text-align: center;">
+                    <div class="card-header">Kasus Meninggal</div>
+                    <div class="card-body">
+                        <i class="fas fa-skull-crossbones icon"></i>
+                    </div>
+                  </div>
+            </div>
+            <div class="card-body" width="100%">
+                <p class="card-text" style="font-size: 0.7rem;"><i>Data diambil dari <b>Database Admin</b></i></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script>
+    window.onscroll = function() {myFunction()};
+    var navbar = document.getElementById("navbar-manual");
+    var sticky = navbar.offsetTop;
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+    const endpoint1 = $("#linechart").attr("data-url");
+const endpoint2 = $("#searchform").attr("data-url");
+
+// Ajax Variant 1 for Chart
+$.ajax({
+    method: "GET",
+    url: endpoint1,
+}).done((data) => {
+    const ctx = document.getElementById('linechart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Kasus Positif',
+                data: data.dataPositif,
+                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                borderColor: 'rgb(255, 205, 86)',
+                borderWidth: 1
+            },
+            {
+                label: 'Kasus Meninggal',
+                data: data.dataMeninggal,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                borderWidth: 1
+            },
+            {
+                label: 'Kasus Sembuh',
+                data: data.dataRecovery,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgb(54, 162, 235)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'point',
+            },
+
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Tanggal'
+                    }
+                },
+                y: {
+                    display: true,
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'Jumlah Kasus'
+                    }
+                }
+            }
+        }
+    })
+});
+
+// Ajax Variant 2 for Query Provinsi
+$(document).ready(function(){
+    $("#submit").on('click',function(){
+        // Run Ajax
+        $.ajax({
+            type:'GET',
+            url:endpoint2,
+            data:{
+                'query': $("#queryInput").val(),
+            },
+            success: function(res){
+                $(".wrap").html(res['html_from_view']);
+            }
+        });
+    });
+});
+</script>
+
+{% endblock content %}

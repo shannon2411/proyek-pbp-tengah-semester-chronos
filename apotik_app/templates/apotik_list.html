@@ -1,0 +1,62 @@
+{% block content %}
+<div class = m-5>
+<div class="card" >
+    <div class="card-header">
+      Hasil pencarian kami:
+    </div>
+    <div class="card-body">
+{% if apotek %}
+  {% for i in apotek %}
+  <style>
+      .card{
+          top: 300px;
+          background: none;
+          border:white;
+      }
+      .card-header{
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          border: solid;
+          border-bottom-color: white;
+      }
+      blockquote{
+        text-align: center;
+        font-weight: bold;
+      }
+
+  </style>
+      <blockquote class="blockquote mb-0">
+        <p>{{i.link|urlizetrunc:200}}</p>
+        <footer class="blockquote-footer">Link untuk apotik kota {{ i.daerah }} </footer>
+      </blockquote>
+  {%endfor%}
+{% else %}
+<style>
+      .card{
+          top: 300px;
+          background: none;
+          border:white;
+      }
+      .card-header{
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          border: solid;
+          border-bottom-color: white;
+      }
+      .message{
+        font-family: Arial, Helvetica, sans-serif;
+        color: red;
+        font-weight: bold;
+        text-align: center;
+      }
+</style>
+  <div class = "message">
+    <p>Maaf kota yang Anda tuju tidak ada dalam daftar kami</p>
+  </div>
+{% endif %}
+</div>
+</div>
+</div>
+{% endblock content %}

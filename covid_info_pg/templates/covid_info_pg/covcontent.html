@@ -1,0 +1,27 @@
+{% if data %}
+  <div class="card text-white bg-success mb-3" style="width: 18rem; text-align: center;">
+    <div class="card-header">Kasus Sembuh di {{ data.provinsi }}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ data.recovered }} Kasus</h5>
+      <p class="card-text" style="font-size: 0.7rem;">Data diambil pada tanggal {{ data.date }}</p>
+    </div>
+  </div>
+  <div class="card text-white bg-warning mb-3" style="width: 18rem; text-align: center;">
+    <div class="card-header">Kasus Positif di {{ data.provinsi }}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ data.positive }} Kasus</h5>
+      <p class="card-text"  style="font-size: 0.7rem;">Data diambil pada tanggal {{ data.date }}</p>
+    </div>
+  </div>
+  <div class="card text-white bg-danger mb-3" style="width: 18rem; text-align: center;">
+    <div class="card-header">Kasus Meninggal di {{ data.provinsi }}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ data.death }} Kasus</h5>
+      <p class="card-text" style="font-size: 0.7rem;">Data diambil pada tanggal {{ data.date }}</p>
+    </div>
+  </div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    Nama Provinsi Yang Dimasukkan Tidak Terdaftar
+</div>
+{% endif %}

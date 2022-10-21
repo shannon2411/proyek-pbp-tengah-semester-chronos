@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+  {% block title %}
+    <title>Discussion Forum</title>
+    <style>
+    .add_disc {
+			width: 100%;
+			background: #f7ba5b ;
+			color: white ;
+		}
+    .add_disc:hover {
+			box-shadow:  4px 4px 4px 4px rgba(0,0,0,0.2);
+			background: #f7ba5b ;
+		}
+
+		.center {
+			margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+		}
+
+    .column {
+      width: 50%;
+      padding: 10px;
+      margin: auto;
+    }
+    .card {
+      padding: 20px;
+      text-align: left;
+      background-color: white;
+      margin-bottom: 25px; /* add space between card */
+      margin-top: -20px;
+    }
+    .writer{
+      margin-top: -10px;
+    }
+
+    .replybtn{
+      width: 100%;
+			background: #74cfbf ;
+			color: white ;;
+    }
+
+    .repCont{
+      background: #e2e2e2 ;
+      padding: 5px;
+      margin: 2px 0;
+    }
+
+    .replies{
+      margin-top: -20px;
+      margin-bottom: -10px;
+    }
+    </style>
+  {% endblock title %}
+
+  {% block content %}
+    <div class="align-items-center">
+      {% if disc %}
+      <div class="d-flex justify-content-center mt-5 mb-5">
+        <a href="{% url 'add_disc' %}"><button type="button" class="btn add_disc" >Add A Discussion</button></a>
+      </div>
+      {% for post in disc %}
+      <div class="column">
+          <div class="card">
+            <h3>{{post.title}}</h3>
+            <div class="writer">
+              <p><small><em>By {{post.author}} | {{post.date}}</em></small></p>
+            </div>
+            <p>{{post.message}}</p>
+
+            {% if request.user.id == post.author.id %}
+                <div class="d-flex justify-content-end">
+                  <a href="{% url 'add_rep' post.id %}"><button type="button" class="btn replybtn btn-sm">Reply</button></a>
+                  <a href="{% url 'edit_post' post.id %}"><button type="button" class="btn btn-secondary btn-sm ml-1">Edit</button></a>
+                  <a href="{% url 'del_post' post.id %}"><button type="button" class="btn btn-danger btn-sm ml-1">Delete</button></a>
+                </div>
+            {% else %}
+            <div class="d-flex justify-content-end">
+              <a href="{% url 'add_rep' post.id %}"><button type="button" class="btn replybtn btn-sm">Reply</button></a>
+            </div>
+            {% endif %}
+            <hr>
+            {% if not post.comments.all %}
+            <div class="repCont">
+              <div class="d-flex justify-content-start repData">
+                <small><strong>Add a Reply</strong></small>
+              </div>
+            </div>
+            {% else %}
+              {% for rep in post.comments.all %}
+              <div class="repCont">
+                <div class="d-flex justify-content-start">
+                  <p><small><strong>{{rep.author}} - {{rep.repDate}}</strong></small></p>
+                </div>
+                <div class="d-flex justify-content-start replies">
+                  <p><small>{{rep.reply}}</small></p>
+                </div>
+                {% if request.user.id == rep.author.id %}
+                <div class="d-flex justify-content-end">
+                  <small><a class="delrep" href="{% url 'del_rep' rep.id %}">Delete</a></small>
+                </div>
+                {% endif %}
+              </div>
+              {% endfor %}
+            {% endif %}
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="d-flex justify-content-center mt-5 center">
+        <a href="{% url 'add_disc' %}"><button type="button" class="btn add_disc" >Add A Discussion</button></a>
+      </div>
+      <div class="center">
+        <h3>No Discussion Yet...</h3>
+      </div>
+      {% endif %}
+    </div>
+  {% endblock content %}

@@ -1,0 +1,363 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<style>
+
+/* hero image styling */
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1584634731339-252c581abfc5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=875&q=80");
+    height: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-style: solid;
+    border-color: #7abecc;
+    border-width: 15px;
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+/* header styling */
+.header {
+    text-align: center;
+}
+
+.header-text {
+    color:#7abecc;
+    font-size: 80px;
+}
+
+/* content styling */
+.content-text {
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+}
+
+/* button styling */
+.card-button {
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    border-style: solid;
+    border-color:#fff;
+    border-radius: 10px;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.card-button:hover {
+    box-shadow:  4px 4px 4px 4px rgba(0,0,0,0.2);
+    background-color: #11baf2;
+}
+
+/* issues styling */
+.vaccine-card, .medicine-card, .info-card, .weather-card {
+    border-style: solid;
+    border-color:#fff;
+    border-radius: 10px;
+    align-self: center;
+    transition: 0.3s;
+}
+
+.vaccine-card:hover, .medicine-card:hover, .info-card:hover, .weather-card:hover {
+    box-shadow:  8px 8px 8px 8px rgba(0,0,0,0.2);
+}
+
+.vaccine-card {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=725&q=80");
+    background-position: left;
+}
+
+.medicine-card {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=830&q=80");
+    background-position: center;
+}
+
+.info-card {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80");
+}
+
+.card-text, .card-title {
+    text-align: center;
+    color: #fff;
+}
+
+/* carousel styling */
+.carousel-slide {
+    border-style: solid;
+    border-color:#fff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    border-radius: 10px;
+    margin-top: 1cm;
+    margin-bottom: 1cm;
+    transition: 0.3s;
+}
+
+.carousel-slide:hover {
+    box-shadow:  8px 8px 8px 8px rgba(0,0,0,0.2);
+}
+
+.carousel-image {
+    float: left;
+    height: 10cm;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    opacity: 0.5;
+}
+
+/* discussion form and feedback styling */
+.form-card, .feedback-card {
+    align-self: center;
+    transition: 0.3S;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+.form-text, .feedback-text {
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+}
+
+.feedback-table {
+    margin-top: 1cm;
+    float: left;
+    width: 100%;
+}
+
+</style>
+
+<title>Covid Cares Homepage</title>
+
+{% endblock title %}
+
+{% block content %}
+
+	<!-- hero image -->
+    <div class="hero-image">
+		<div class="hero-text">
+		  <h1>COVID-Cares</h1>
+		  <p>Ready to Help Your COVID-related Issues Any Way We Can</p>
+		  <p>_____________________________________________________________</p>
+		</div>
+	</div>
+
+	<div class="jumbotron jumbotron-fluid header">
+		<div class="container">
+		  <h1 class="display-4 header-text">What are Your Issues Related to?</h1>
+		</div>
+	</div>
+
+	<!-- issues in card format -->
+	<div class="card-deck" style="margin: 10px;">
+		<div class="card vaccine-card">
+			<div class="card-body">
+			<h5 class="card-title">Vaksin</h5>
+			<p class="card-text">Are you in need of COVID-19 vaccine but you don't know how to get one? Do you want to find the nearest vaccine distribution?</p>
+			<button onclick="window.location.href='vaccine-info/'" class="btn btn-primary card-button">Click Here!</button>
+			</div>
+		</div>
+
+		<div class="card medicine-card">
+			<div class="card-body">
+			<h5 class="card-title">Obat - obatan</h5>
+			<p class="card-text">Are you in need of medicines related/unrelated to COVID-19? Are you having trouble finding the nearest pharmacy?</p>
+			<button onclick="window.location.href='apotik/'" class="btn btn-primary card-button">Click Here!</button>
+			</div>
+		</div>
+
+		<div class="card info-card">
+			<div class="card-body">
+			<h5 class="card-title">Info COVID-19</h5>
+			<p class="card-text">Do you need general or detailed information about COVID-19? Do you want to catch up with the latest COVID-19 information?</p>
+			<button onclick="window.location.href='covid-info/'" class="btn btn-primary card-button">Click Here!</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- carousel displaying news -->
+	<div class="container">
+		<div id="carouselExampleCaptions" class="carousel slide carousel-slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="https://images.unsplash.com/photo-1618961734760-466979ce35b0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1032&q=80" class="d-block carousel-image" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Lebih dari 12 Juta Vaksin Tiba Dalam Tiga Hari, Total Vaksin Tembus 300 Juta Dosis</h5>
+						<a href="https://covid19.go.id/p/berita/lebih-dari-12-juta-vaksin-tiba-dalam-tiga-hari-total-vaksin-tembus-300-juta-dosis">Read More</a>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="https://images.unsplash.com/photo-1586448646505-e7bcafcd83a1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80" class="d-block carousel-image" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Kesembuhan COVID-19 Bertambah Mencapai 4.086.759 Orang</h5>
+						<a href="https://covid19.go.id/p/berita/kesembuhan-covid-19-bertambah-mencapai-4086759-orang">Read More</a>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="https://media.istockphoto.com/photos/business-document-report-on-paper-and-tablet-with-sales-data-and-picture-id1182777182?b=1&k=20&m=1182777182&s=170667a&w=0&h=Bdq_sXQIFf64FIoPQQsTuBt1-FnkbtVcm96LR7P_0Pc=" class="d-block carousel-image" alt="...">
+					<div class="carousel-caption d-none d-md-block">
+						<h5>Optimalisasi Anggaran Program PEN Dorong Akselerasi Pemulihan Ekonomi Nasional</h5>
+						<a href="https://covid19.go.id/berita/optimalisasi-anggaran-program-pen-dorong-akselerasi-pemulihan-ekonomi-nasional">Read More</a>
+					</div>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</div>
+
+    <!-- weather card -->
+    <div class="card weather-card" style="display:block ; width: 30%; margin: 0 auto; background-color: #0d81ee; color: #fff;">
+        <div class="search" style="width: 70%; margin: 0 auto;">
+            <input type="text" class="search-bar">
+            <button class="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="52" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="weather" style="width: 50%; margin: 0 auto;">
+            <h2 class="city">Look for Weather in Your City!</h2>
+            <div class="temp"></div>
+            <img src="" alt="" class="icon">
+            <div class="description"></div>
+        </div>
+    </div>
+
+    <script>
+        let weather = {
+            "apiKey": "9adc582ec298c95accc02046c1411549",
+            fetchWeather: function(city) {
+                fetch(
+                    "https://api.openweathermap.org/data/2.5/weather?q=" 
+                    + city 
+                    + "&units=metric&appid=" 
+                    + this.apiKey
+                    )
+                .then((response) => response.json())
+                .then((data) => this.displayWeather(data));
+            },
+            displayWeather: function(data) {
+                const { name } = data;
+                const { icon, description } = data.weather[0];
+                const { temp } = data.main;
+                console.log(name, icon, description, temp);
+                document.querySelector(".city").innerText = "Weather in " + name;
+                document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+                document.querySelector(".description").innerText = description;
+                document.querySelector(".temp").innerText = temp + "°C";
+            },
+            search: function() {
+                this.fetchWeather(document.querySelector(".search-bar").value);
+            }
+        };
+
+        document.querySelector(".search-button").addEventListener("click", function() {
+            weather.search();
+         });
+
+        document.querySelector(".search-bar").addEventListener("keyup", function(event) {
+            if (event.key == "Enter") {
+                weather.search();
+            }
+        })
+    </script>
+
+	<!-- discussion form -->
+	<div class="form-card">
+		<div class="form-text">
+			<h1>Still No Luck? Try Our Forum!</h1>
+			<button onclick="window.location.href='forum/'" class="btn btn-primary card-button">Go to Forum</button>
+		</div>
+	</div>
+
+	{% if user.is_authenticated %}
+	<div class="feedback-card">
+		<div class="feedback-text">
+			<h1>Enjoying Your Time Here?</h1>
+			<!-- Button trigger modal -->
+			<button class="btn btn-primary card-button" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+				Share Us Your Experience!
+			</button>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tulis Feedback Kamu di Sini :D</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form action="{% url 'homepage:add_feedback' %}" method="post">
+				{% csrf_token %}
+				<div class="mb-3">
+					<label for="username" class="form-label">Username (boleh anonymous)</label>
+					<input type="text" class="form-control" id="username" name="username">
+				</div>
+				<div class="mb-3">
+					<label for="feedback" class="form-label">Feedback</label>
+					<textarea class="form-control" id="feedback-txt" rows="3"></textarea>
+					<input type="hidden" class="form-control" id="feedback-inp" name="feedback">
+				</div>
+				<button type="submit" class="btn btn-primary card-button" onclick="myFunction()">Submit</button>
+				</form>
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function myFunction() {
+		  var x = document.getElementById("feedback-txt").value;
+		  document.getElementById("feedback-inp").value = x;
+		}
+	</script>
+	{% endif %}
+    
+	{% if user.is_authenticated %}
+	<!-- feedback table -->
+	<div class="feedback-table list-group">
+		{% for i in feedbacks %}
+		<div class="list-group-item list-group-item-action flex-column align-items-start">
+		  <div class="d-flex justify-content-between">
+			<h5 class="mb-1">{{ i.username }}</h5>
+			<small>feedback</small>
+		  </div>
+		  <p class="mb-1">{{ i.feedback }}</p>
+		</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+    <div class="container" style="height: 1cm; width: 100%; background-color: #7abecc;">
+    </div>
+
+{% endblock content %}

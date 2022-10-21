@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    
+<head>
+	{% block title %}
+
+	<title>Login</title>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: #F3F4ED;
+			font-family: 'Work Sans';
+      		
+		}
+		nav{
+			font-family: 'Work Sans', sans-serif;
+			font-weight: normal;
+			font-size: 13px;
+			font-size: 1rem;
+		}
+		
+		.user_card {
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: #74cfbf;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px ;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+			
+
+		}
+		
+		.text {
+			padding: 100px 40px 16px 16px;
+		}
+
+		.form_container {
+			margin-top: 20px;
+		}
+
+		#form-title{
+			color: #fff;
+			
+		}
+
+		.login_btn {
+			background-color: white; 
+			color: #f7ba5b;
+			font-weight: bold; 
+			border: 2px solid #f7ba5b;
+			border-radius: 8px;
+			text-align: center;
+			transition-duration: 0.4s;
+			cursor: pointer;
+		}
+		.login_btn:hover {
+			background-color: #f7ba5b;
+        	color: white;
+		}
+		.login_container {
+			padding: 0 2rem;
+		}
+		.input-group-text {
+			background: #f7ba5b !important;
+			color: white !important;
+			border: 0 !important;
+			border-radius: 0.25rem 0 0 0.25rem !important;
+			height: 100%;
+		}
+		.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+
+		#messages{
+			background-color: grey;
+			color: #fff;
+			padding: 10px;
+			margin-top: 10px;
+		}
+	</style>
+	{% endblock title %}
+
+</head>
+<body>
+	{% block content %}
+	<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="text"> 
+			<div class="user_card">
+				<div class="d-flex justify-content-center">
+					<h3 id="form-title" style="font-family: Comfortaa;">MASUK</h3>
+				</div>
+				<div class="d-flex justify-content-center form_container">
+					<form action="{% url 'login:index' %}" method="POST">
+						{% csrf_token %}
+						<div class="mb-3">
+						  <label class="form-label">Username</label>
+						  <input class="form-control" id="email" name="username">
+						</div>
+						<div class="mb-3">
+						  <label for="password" class="form-label">Password</label>
+						  <input type="password" class="form-control" id="password" name="password">
+						</div>
+				  
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+
+				</div>
+		
+				<div class="mt-4">
+					<div class="d-flex justify-content-center links" style="color: #F3F4ED; font-weight: bold;">
+						Belum punya akun?  <a href="{% url 'sign_up:Sign-Up' %}" class="ml-2" style="color: #f7ba5b ;">  Daftar</a>
+					</div>
+			
+				</div>
+
+			</div>
+		</div>
+		</div>
+	</div>
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<!-- Footer -->
+	<footer class="text-center text-lg-start bg-light text-muted fixed-bottom">
+		<!-- Copyright -->
+	  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+		© 2021 Copyright covidcares
+	  </div>
+	  <!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function() {
+
+	$(document).on('submit', '#form-login',function (e) {
+		e.preventDefault()
+
+		$.ajax({
+			type:'POST',
+			url:"{% url 'login:index' %}",
+			data:{
+				username: $('#username').val(),
+				password: $('#password').val(),
+				csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+			},
+			success: function (response) {
+				if(response.status == 'berhasil'){
+					console.log('berhasil')
+				} else{
+					console.log('gagal')
+				}
+			}
+		})
+	})
+});
+</script>
+{% endblock content %}
+</body>
+</html>
